@@ -334,15 +334,24 @@ def stats_section(playlists):
 
     stats = compute_playlist_stats(playlists)
 
-    col1, col2, col3 = st.columns(3)
+    # --- Song counts ---
+    st.subheader("Song counts")
+    col1, col2, col3, col4 = st.columns(4)
     col1.metric("Total songs", stats["total_songs"])
     col2.metric("Hype songs", stats["hype_count"])
     col3.metric("Chill songs", stats["chill_count"])
-
-    col4, col5, col6 = st.columns(3)
     col4.metric("Mixed songs", stats["mixed_count"])
+
+    # --- Playlist ratios ---
+    st.subheader("Playlist ratios")
+    col5, col6, col7 = st.columns(3)
     col5.metric("Hype ratio", f"{stats['hype_ratio']:.2f}")
-    col6.metric("Average energy", f"{stats['avg_energy']:.2f}")
+    col6.metric("Chill ratio", f"{stats['chill_ratio']:.2f}")
+    col7.metric("Mixed ratio", f"{stats['mixed_ratio']:.2f}")
+
+    # --- General stats ---
+    st.subheader("General")
+    st.metric("Average energy", f"{stats['avg_energy']:.2f}")
 
     top_artist = stats["top_artist"]
     if top_artist:
